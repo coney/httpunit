@@ -31,12 +31,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletInputStream;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 
 /**
@@ -281,6 +277,11 @@ class ServletUnitHttpRequest implements HttpServletRequest {
         return getSession( true );
     }
 
+    @Override
+    public String changeSessionId() {
+        return "";
+    }
+
 
     /**
      * Checks whether the requested session ID is still valid.
@@ -295,6 +296,36 @@ class ServletUnitHttpRequest implements HttpServletRequest {
      **/
     public boolean isRequestedSessionIdFromURL() {
         return false;
+    }
+
+    @Override
+    public boolean authenticate(HttpServletResponse httpServletResponse) throws IOException, ServletException {
+        return false;
+    }
+
+    @Override
+    public void login(String s, String s1) throws ServletException {
+
+    }
+
+    @Override
+    public void logout() throws ServletException {
+
+    }
+
+    @Override
+    public Collection<Part> getParts() throws IOException, ServletException {
+        return List.of();
+    }
+
+    @Override
+    public Part getPart(String s) throws IOException, ServletException {
+        return null;
+    }
+
+    @Override
+    public <T extends HttpUpgradeHandler> T upgrade(Class<T> aClass) throws IOException, ServletException {
+        return null;
     }
 
 
@@ -316,6 +347,11 @@ class ServletUnitHttpRequest implements HttpServletRequest {
      **/
     public int getContentLength() {
         return getIntHeader( "Content-length" );
+    }
+
+    @Override
+    public long getContentLengthLong() {
+        return 0;
     }
 
 
@@ -493,7 +529,7 @@ class ServletUnitHttpRequest implements HttpServletRequest {
     /**
      *
      * @deprecated 	As of Version 2.1 of the Java Servlet API,
-     * 			use {@link javax.servlet.ServletContext#getRealPath} instead.
+     * 			use {@link jakarta.servlet.ServletContext#getRealPath} instead.
      *
      */
     public String getRealPath( String path ) {
@@ -761,6 +797,56 @@ class ServletUnitHttpRequest implements HttpServletRequest {
 
     public int getLocalPort() {
         return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public ServletContext getServletContext() {
+        return null;
+    }
+
+    @Override
+    public AsyncContext startAsync() throws IllegalStateException {
+        return null;
+    }
+
+    @Override
+    public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+        return null;
+    }
+
+    @Override
+    public boolean isAsyncStarted() {
+        return false;
+    }
+
+    @Override
+    public boolean isAsyncSupported() {
+        return false;
+    }
+
+    @Override
+    public AsyncContext getAsyncContext() {
+        return null;
+    }
+
+    @Override
+    public DispatcherType getDispatcherType() {
+        return null;
+    }
+
+    @Override
+    public String getRequestId() {
+        return "";
+    }
+
+    @Override
+    public String getProtocolRequestId() {
+        return "";
+    }
+
+    @Override
+    public ServletConnection getServletConnection() {
+        return null;
     }
 
 //--------------------------------------------- package members ----------------------------------------------

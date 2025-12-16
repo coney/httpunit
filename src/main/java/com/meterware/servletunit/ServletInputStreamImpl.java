@@ -22,7 +22,8 @@ package com.meterware.servletunit;
 import java.io.IOException;
 import java.io.ByteArrayInputStream;
 
-import javax.servlet.ServletInputStream;
+import jakarta.servlet.ReadListener;
+import jakarta.servlet.ServletInputStream;
 
 
 /**
@@ -44,4 +45,18 @@ class ServletInputStreamImpl extends ServletInputStream {
         return _baseStream.read();
     }
 
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
+
+    @Override
+    public boolean isReady() {
+        return false;
+    }
+
+    @Override
+    public void setReadListener(ReadListener readListener) {
+
+    }
 }

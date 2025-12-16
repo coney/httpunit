@@ -24,9 +24,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.net.URL;
 
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
-import javax.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.ServletContext;
 
 
 class ServletUnitHttpSession implements HttpSession {
@@ -118,15 +117,6 @@ class ServletUnitHttpSession implements HttpSession {
         _invalid = true;
         _values.clear();
     }
-
-
-    /**
-     * @deprecated no replacement.
-     **/
-    public HttpSessionContext getSessionContext() {
-        return null;
-    }
-
 
     /**
      * @deprecated as of JSDK 2.2, use getAttribute

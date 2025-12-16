@@ -30,9 +30,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.WriteListener;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 class ServletUnitHttpResponse implements HttpServletResponse {
@@ -316,6 +317,11 @@ class ServletUnitHttpResponse implements HttpServletResponse {
         setIntHeader( "Content-Length", len );
     }
 
+    @Override
+    public void setContentLengthLong(long l) {
+        setContentLength((int) l);
+    }
+
 
 //------------------------------- the following methods are new in JSDK 2.2 ----------------------
 
@@ -463,8 +469,23 @@ class ServletUnitHttpResponse implements HttpServletResponse {
     /**
      * Returns the status of this response.
      **/
-    int getStatus() {
+    public int getStatus() {
         return _status;
+    }
+
+    @Override
+    public String getHeader(String s) {
+        return "";
+    }
+
+    @Override
+    public Collection<String> getHeaders(String s) {
+        return List.of();
+    }
+
+    @Override
+    public Collection<String> getHeaderNames() {
+        return List.of();
     }
 
 
@@ -628,4 +649,14 @@ class ServletUnitOutputStream extends ServletOutputStream {
     }
 
     private ByteArrayOutputStream _stream;
+
+    @Override
+    public boolean isReady() {
+        return false;
+    }
+
+    @Override
+    public void setWriteListener(WriteListener writeListener) {
+
+    }
 }

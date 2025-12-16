@@ -27,14 +27,16 @@ import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
 import org.junit.Test;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
+import java.util.*;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -162,9 +164,9 @@ public class StatefulTest {
         assertEquals("First attribute name", "color", e.nextElement());
         assertTrue("List did not end after one name", !e.hasMoreElements());
 
-        String[] names = ic.getRequest().getSession().getValueNames();
-        assertEquals("number of value names", 1, names.length);
-        assertEquals("first name", "color", names[0]);
+        ArrayList<String> names = Collections.list(ic.getRequest().getSession().getAttributeNames());
+        assertEquals("number of value names", 1, names.size());
+        assertEquals("first name", "color", names.get(0));
     }
 
 

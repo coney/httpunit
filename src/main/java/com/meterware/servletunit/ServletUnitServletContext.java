@@ -21,15 +21,14 @@ package com.meterware.servletunit;
  *
  *******************************************************************************************************************/
 
-import javax.servlet.*;
+import jakarta.servlet.*;
+import jakarta.servlet.descriptor.JspConfigDescriptor;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * This class is a private implementation of the ServletContext class.
@@ -54,7 +53,7 @@ public class ServletUnitServletContext implements ServletContext {
 	 * In a security conscious environment, the servlet container may return null
 	 * for a given URL.
 	 **/
-	public javax.servlet.ServletContext getContext(java.lang.String A) {
+	public jakarta.servlet.ServletContext getContext(java.lang.String A) {
 		return null;
 	}
 
@@ -74,6 +73,16 @@ public class ServletUnitServletContext implements ServletContext {
 	 **/
 	public int getMinorVersion() {
 		return 4;
+	}
+
+	@Override
+	public int getEffectiveMajorVersion() {
+		return 0;
+	}
+
+	@Override
+	public int getEffectiveMinorVersion() {
+		return 0;
 	}
 
 	/**
@@ -166,7 +175,7 @@ public class ServletUnitServletContext implements ServletContext {
 	 * resources in foreign contexts. This method returns null if the
 	 * ServletContext cannot return a RequestDispatcher.
 	 **/
-	public javax.servlet.RequestDispatcher getRequestDispatcher(String path) {
+	public jakarta.servlet.RequestDispatcher getRequestDispatcher(String path) {
 		try {
 			URL url = new URL("http", "localhost", _application.getContextPath()
 					+ path);
@@ -194,7 +203,7 @@ public class ServletUnitServletContext implements ServletContext {
 	 * @param servletName
 	 *          - the name of the dispatcher to get
 	 **/
-	public javax.servlet.RequestDispatcher getNamedDispatcher(
+	public jakarta.servlet.RequestDispatcher getNamedDispatcher(
 			java.lang.String servletName) {
 		final WebApplication.ServletConfiguration servletConfig = _application
 				.getServletByName(servletName);
@@ -216,7 +225,7 @@ public class ServletUnitServletContext implements ServletContext {
 
 		final Exception instantiationException = tempException;
 
-		return new javax.servlet.RequestDispatcher() {
+		return new jakarta.servlet.RequestDispatcher() {
 
 			public void forward(ServletRequest request, ServletResponse response)
 					throws ServletException, IOException {
@@ -271,7 +280,7 @@ public class ServletUnitServletContext implements ServletContext {
 	/**
 	 * @deprecated as of Servlet API 2.1
 	 **/
-	public javax.servlet.Servlet getServlet(java.lang.String A) {
+	public jakarta.servlet.Servlet getServlet(java.lang.String A) {
 		return null;
 	}
 
@@ -372,6 +381,11 @@ public class ServletUnitServletContext implements ServletContext {
 		return getContextParams().keys();
 	}
 
+	@Override
+	public boolean setInitParameter(String s, String s1) {
+		return false;
+	}
+
 	/**
 	 * Returns the servlet container attribute with the given name, or null if
 	 * there is no attribute by that name. An attribute allows a servlet container
@@ -453,6 +467,161 @@ public class ServletUnitServletContext implements ServletContext {
 	 */
 	public String getServletContextName() {
 		return _application.getDisplayName();
+	}
+
+	@Override
+	public ServletRegistration.Dynamic addServlet(String s, String s1) {
+		return null;
+	}
+
+	@Override
+	public ServletRegistration.Dynamic addServlet(String s, Servlet servlet) {
+		return null;
+	}
+
+	@Override
+	public ServletRegistration.Dynamic addServlet(String s, Class<? extends Servlet> aClass) {
+		return null;
+	}
+
+	@Override
+	public ServletRegistration.Dynamic addJspFile(String s, String s1) {
+		return null;
+	}
+
+	@Override
+	public <T extends Servlet> T createServlet(Class<T> aClass) throws ServletException {
+		return null;
+	}
+
+	@Override
+	public ServletRegistration getServletRegistration(String s) {
+		return null;
+	}
+
+	@Override
+	public Map<String, ? extends ServletRegistration> getServletRegistrations() {
+		return Map.of();
+	}
+
+	@Override
+	public FilterRegistration.Dynamic addFilter(String s, String s1) {
+		return null;
+	}
+
+	@Override
+	public FilterRegistration.Dynamic addFilter(String s, Filter filter) {
+		return null;
+	}
+
+	@Override
+	public FilterRegistration.Dynamic addFilter(String s, Class<? extends Filter> aClass) {
+		return null;
+	}
+
+	@Override
+	public <T extends Filter> T createFilter(Class<T> aClass) throws ServletException {
+		return null;
+	}
+
+	@Override
+	public FilterRegistration getFilterRegistration(String s) {
+		return null;
+	}
+
+	@Override
+	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+		return Map.of();
+	}
+
+	@Override
+	public SessionCookieConfig getSessionCookieConfig() {
+		return null;
+	}
+
+	@Override
+	public void setSessionTrackingModes(Set<SessionTrackingMode> set) {
+
+	}
+
+	@Override
+	public Set<SessionTrackingMode> getDefaultSessionTrackingModes() {
+		return Set.of();
+	}
+
+	@Override
+	public Set<SessionTrackingMode> getEffectiveSessionTrackingModes() {
+		return Set.of();
+	}
+
+	@Override
+	public void addListener(String s) {
+
+	}
+
+	@Override
+	public <T extends EventListener> void addListener(T t) {
+
+	}
+
+	@Override
+	public void addListener(Class<? extends EventListener> aClass) {
+
+	}
+
+	@Override
+	public <T extends EventListener> T createListener(Class<T> aClass) throws ServletException {
+		return null;
+	}
+
+	@Override
+	public JspConfigDescriptor getJspConfigDescriptor() {
+		return null;
+	}
+
+	@Override
+	public ClassLoader getClassLoader() {
+		return null;
+	}
+
+	@Override
+	public void declareRoles(String... strings) {
+
+	}
+
+	@Override
+	public String getVirtualServerName() {
+		return "";
+	}
+
+	@Override
+	public int getSessionTimeout() {
+		return 0;
+	}
+
+	@Override
+	public void setSessionTimeout(int i) {
+
+	}
+
+	@Override
+	public String getRequestCharacterEncoding() {
+		return "";
+	}
+
+	@Override
+	public void setRequestCharacterEncoding(String s) {
+
+	}
+
+	@Override
+	public String getResponseCharacterEncoding() {
+		return "";
+	}
+
+	@Override
+	public void setResponseCharacterEncoding(String s) {
+
 	}
 
 	// -------------------------------------- servlet-api 2.5 additions

@@ -23,7 +23,7 @@ package com.meterware.servletunit;
 import com.meterware.httpunit.WebResponse;
 import org.junit.Test;
 
-import javax.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServlet;
 
 
 /**

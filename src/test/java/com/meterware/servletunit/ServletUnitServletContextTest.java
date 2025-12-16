@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNull;
 import java.io.InputStream;
 import java.net.URL;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.junit.Test;
 

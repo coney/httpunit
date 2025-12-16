@@ -21,21 +21,16 @@ package com.meterware.servletunit;
  *******************************************************************************************************************/
 
 import com.meterware.httpunit.HttpUnitTest;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import org.junit.Test;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.Principal;
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -215,6 +210,11 @@ public class RequestContextTest extends HttpUnitTest {
             return null;
         }
 
+        @Override
+        public String changeSessionId() {
+            return "";
+        }
+
 
         public boolean isRequestedSessionIdValid() {
             return false;
@@ -228,6 +228,36 @@ public class RequestContextTest extends HttpUnitTest {
 
         public boolean isRequestedSessionIdFromURL() {
             return false;
+        }
+
+        @Override
+        public boolean authenticate(HttpServletResponse response) throws IOException, ServletException {
+            return false;
+        }
+
+        @Override
+        public void login(String username, String password) throws ServletException {
+
+        }
+
+        @Override
+        public void logout() throws ServletException {
+
+        }
+
+        @Override
+        public Collection<Part> getParts() throws IOException, ServletException {
+            return List.of();
+        }
+
+        @Override
+        public Part getPart(String name) throws IOException, ServletException {
+            return null;
+        }
+
+        @Override
+        public <T extends HttpUpgradeHandler> T upgrade(Class<T> handlerClass) throws IOException, ServletException {
+            return null;
         }
 
 
@@ -256,6 +286,11 @@ public class RequestContextTest extends HttpUnitTest {
 
 
         public int getContentLength() {
+            return 0;
+        }
+
+        @Override
+        public long getContentLengthLong() {
             return 0;
         }
 
@@ -371,6 +406,56 @@ public class RequestContextTest extends HttpUnitTest {
 
         public int getLocalPort() {
             return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override
+        public ServletContext getServletContext() {
+            return null;
+        }
+
+        @Override
+        public AsyncContext startAsync() throws IllegalStateException {
+            return null;
+        }
+
+        @Override
+        public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+            return null;
+        }
+
+        @Override
+        public boolean isAsyncStarted() {
+            return false;
+        }
+
+        @Override
+        public boolean isAsyncSupported() {
+            return false;
+        }
+
+        @Override
+        public AsyncContext getAsyncContext() {
+            return null;
+        }
+
+        @Override
+        public DispatcherType getDispatcherType() {
+            return null;
+        }
+
+        @Override
+        public String getRequestId() {
+            return "";
+        }
+
+        @Override
+        public String getProtocolRequestId() {
+            return "";
+        }
+
+        @Override
+        public ServletConnection getServletConnection() {
+            return null;
         }
     }
 

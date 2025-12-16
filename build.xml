@@ -102,7 +102,7 @@
 <!-- Check to see what optional dependencies are available               -->
 <!-- =================================================================== -->
 <target name="check_for_optional_packages" depends="prepare">
-    <available property="jsdk.present"     classname="javax.servlet.http.HttpServlet"
+    <available property="jsdk.present"     classname="jakarta.servlet.http.HttpServlet"
                                            classpathref="base.classpath" />
     <available property="javamail.present" classname="javax.mail.internet.MimeMultipart"
                                            classpathref="base.classpath" />

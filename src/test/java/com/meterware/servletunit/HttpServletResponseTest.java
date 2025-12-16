@@ -25,8 +25,8 @@ import com.meterware.httpunit.FrameSelector;
 import com.meterware.httpunit.WebResponse;
 import org.junit.Test;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
