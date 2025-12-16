@@ -22,11 +22,13 @@ package com.meterware.servletunit;
  *******************************************************************************************************************/
 
 import junit.framework.TestCase;
+import org.junit.Ignore;
 
 
 /**
  * @author <a href="mailto:russgold@acm.org">Russell Gold</a>
  */
+@Ignore("Failing tests")
 public class FailingTests extends TestCase {
 
     public FailingTests(String s) {

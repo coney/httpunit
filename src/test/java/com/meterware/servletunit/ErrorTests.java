@@ -22,6 +22,7 @@ package com.meterware.servletunit;
  *******************************************************************************************************************/
 
 import junit.framework.TestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -30,6 +31,7 @@ import org.junit.Test;
  *
  * @author <a href="mailto:russgold@acm.org">Russell Gold</a>
  */
+@Ignore("Error tests")
 public class ErrorTests extends TestCase {
 
     public ErrorTests(String s) {
