@@ -26,6 +26,7 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,6 +36,16 @@ abstract class XMLUtils {
 
     static String getChildNodeValue( Element root, String childNodeName ) throws SAXException {
         return getChildNodeValue( root, childNodeName, null );
+    }
+
+
+    static List<String> getChildNodeValues(Element root, String childNodeName) throws SAXException {
+        List<String> result = new ArrayList<>();
+        NodeList nodeList = root.getElementsByTagName(childNodeName);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            result.add(getTextValue(nodeList.item(i)).trim());
+        }
+        return result;
     }
 
 
