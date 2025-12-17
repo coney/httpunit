@@ -1,24 +1,25 @@
 package com.meterware.servletunit;
 /********************************************************************************************************************
-* $Id$
-*
-* Copyright (c) 2000-2004,2006, Russell Gold
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-* documentation files (the "Software"), to deal in the Software without restriction, including without limitation
-* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
-* to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions
-* of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-* CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-* DEALINGS IN THE SOFTWARE.
-*
-*******************************************************************************************************************/
+ * $Id$
+ *
+ * Copyright (c) 2000-2004,2006, Russell Gold
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
+ * to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions
+ * of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+ * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ *******************************************************************************************************************/
+
 import com.meterware.httpunit.HttpUnitUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -48,8 +49,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
     /**
      * @deprecated Use encodeURL(String url)
      */
-    public String encodeUrl( String url ) {
-        return encodeURL( url );
+    public String encodeUrl(String url) {
+        return encodeURL(url);
     }
 
 
@@ -57,8 +58,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * Adds the specified cookie to the response.  It can be called
      * multiple times to set more than one cookie.
      */
-    public void addCookie( Cookie cookie ) {
-        _cookies.addElement( cookie );
+    public void addCookie(Cookie cookie) {
+        _cookies.addElement(cookie);
     }
 
 
@@ -66,16 +67,16 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * Checks whether the response message header has a field with
      * the specified name.
      */
-    public boolean containsHeader( String name ) {
-        return _headers.containsKey( name.toUpperCase() );
+    public boolean containsHeader(String name) {
+        return _headers.containsKey(name.toUpperCase());
     }
 
 
     /**
      * @deprecated Use encodeRedirectURL(String url)
      **/
-    public String encodeRedirectUrl( String url ) {
-        return encodeRedirectURL( url );
+    public String encodeRedirectUrl(String url) {
+        return encodeRedirectURL(url);
     }
 
 
@@ -87,7 +88,7 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * For example, if the browser supports cookies, or session
      * tracking is turned off, URL encoding is unnecessary.
      **/
-    public String encodeURL( String url ) {
+    public String encodeURL(String url) {
         return url;
     }
 
@@ -102,7 +103,7 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * encode a normal link, this method is seperate from the
      * <code>encodeUrl</code> method.
      **/
-    public String encodeRedirectURL( String url ) {
+    public String encodeRedirectURL(String url) {
         return url;
     }
 
@@ -113,9 +114,9 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * example, <code><em>https://hostname/path/file.html</em></code>).
      * Relative URLs are not permitted here.
      */
-    public void sendRedirect( String location ) throws IOException {
-        setStatus( HttpServletResponse.SC_MOVED_TEMPORARILY );
-        setHeader( "Location", location );
+    public void sendRedirect(String location) throws IOException {
+        setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+        setHeader("Location", location);
     }
 
 
@@ -128,8 +129,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * header; the message is enclosed in simple body tags
      * (&lt;body&gt;&lt;/body&gt;).
      **/
-    public void sendError( int sc ) throws IOException {
-        sendError( sc, "" );
+    public void sendError(int sc) throws IOException {
+        sendError(sc, "");
     }
 
 
@@ -143,14 +144,14 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * (&lt;body&gt;&lt;/body&gt;).
      **/
     public void sendError(int sc, String msg) throws IOException {
-        setStatus( sc );
+        setStatus(sc);
         _statusMessage = msg;
 
         _writer = null;
         _servletStream = null;
 
-        setContentType( "text/html" );
-        getWriter().println( "<html><head><title>" + msg + "</title></head><body>" + msg + "</body></html>" );
+        setContentType("text/html");
+        getWriter().println("<html><head><title>" + msg + "</title></head><body>" + msg + "</body></html>");
     }
 
 
@@ -161,7 +162,7 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * is an error, the <code>sendError</code> method should be used
      * instead.
      **/
-    public void setStatus( int sc ) {
+    public void setStatus(int sc) {
         _status = sc;
     }
 
@@ -171,8 +172,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * To set a status code use setStatus(int), to send an error with a description
      * use sendError(int, String). Sets the status code and message for this response.
      **/
-    public void setStatus( int sc, String msg ) {
-        setStatus( sc );
+    public void setStatus(int sc, String msg) {
+        setStatus(sc);
     }
 
 
@@ -183,11 +184,11 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * used to test for the presence of a header before setting its
      * value.
      **/
-    public void setHeader( String name, String value ) {
+    public void setHeader(String name, String value) {
         ArrayList values = new ArrayList();
-        values.add( value );
+        values.add(value);
         synchronized (_headers) {
-            _headers.put( name.toUpperCase(), values );
+            _headers.put(name.toUpperCase(), values);
         }
     }
 
@@ -199,13 +200,13 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * method can be used to test for the presence of a header before
      * setting its value.
      **/
-    public void setIntHeader( String name, int value ) {
-        setHeader( name, asHeaderValue( value ) );
+    public void setIntHeader(String name, int value) {
+        setHeader(name, asHeaderValue(value));
     }
 
 
-    private String asHeaderValue( int value ) {
-        return Integer.toString( value );
+    private String asHeaderValue(int value) {
+        return Integer.toString(value);
     }
 
 
@@ -217,16 +218,16 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * <code>containsHeader</code> method can be used to test for the
      * presence of a header before setting its value.
      **/
-    public void setDateHeader( String name, long date ) {
-        setHeader( name, asDateHeaderValue( date ) );
+    public void setDateHeader(String name, long date) {
+        setHeader(name, asDateHeaderValue(date));
     }
 
 
-    private String asDateHeaderValue( long date ) {
-        Date value = new Date( date );
-        SimpleDateFormat formatter = new SimpleDateFormat( RFC1123_DATE_SPEC, Locale.US );
-        formatter.setTimeZone( TimeZone.getTimeZone( "Greenwich Mean Time" ) );
-        return formatter.format( value );
+    private String asDateHeaderValue(long date) {
+        Date value = new Date(date);
+        SimpleDateFormat formatter = new SimpleDateFormat(RFC1123_DATE_SPEC, Locale.US);
+        formatter.setTimeZone(TimeZone.getTimeZone("Greenwich Mean Time"));
+        return formatter.format(value);
     }
 
 
@@ -248,8 +249,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * before you obtain a <code>PrintWriter</code> or
      * {@link ServletOutputStream} object to return a response.
      **/
-    public void setContentType( String type ) {
-        String[] typeAndEncoding = HttpUnitUtils.parseContentTypeHeader( type );
+    public void setContentType(String type) {
+        String[] typeAndEncoding = HttpUnitUtils.parseContentTypeHeader(type);
 
         _contentType = typeAndEncoding[0];
         if (typeAndEncoding[1] != null) _encoding = typeAndEncoding[1];
@@ -261,13 +262,13 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * data in the response. The servlet engine does not encode the
      * binary data.
      *
-     * @exception IllegalStateException if you have already called the <code>getWriter</code> method
+     * @throws IllegalStateException if you have already called the <code>getWriter</code> method
      **/
     public ServletOutputStream getOutputStream() throws IOException {
-        if (_writer != null) throw new IllegalStateException( "Tried to create output stream; writer already exists" );
+        if (_writer != null) throw new IllegalStateException("Tried to create output stream; writer already exists");
         if (_servletStream == null) {
             _outputStream = new ByteArrayOutputStream();
-            _servletStream = new ServletUnitOutputStream( _outputStream );
+            _servletStream = new ServletUnitOutputStream(_outputStream);
         }
         return _servletStream;
     }
@@ -288,21 +289,21 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * called {@link #getOutputStream} for this
      * <code>ServletResponse</code> object.
      *
-     * @exception UnsupportedEncodingException  if the character encoding specified in
-     *						<code>setContentType</code> cannot be
-     *						used
-     *
-     * @exception IllegalStateException    	if the <code>getOutputStream</code>
-     * 						method has already been called for this
-     *						response object; in that case, you can't
-     *						use this method
+     * @throws UnsupportedEncodingException if the character encoding specified in
+     *                                      <code>setContentType</code> cannot be
+     *                                      used
+     * @throws IllegalStateException        if the <code>getOutputStream</code>
+     *                                      method has already been called for this
+     *                                      response object; in that case, you can't
+     *                                      use this method
      *
      **/
     public PrintWriter getWriter() throws UnsupportedEncodingException {
-        if (_servletStream != null) throw new IllegalStateException( "Tried to create writer; output stream already exists" );
+        if (_servletStream != null)
+            throw new IllegalStateException("Tried to create writer; output stream already exists");
         if (_writer == null) {
             _outputStream = new ByteArrayOutputStream();
-            _writer = new PrintWriter( new OutputStreamWriter( _outputStream, getCharacterEncoding() ) );
+            _writer = new PrintWriter(new OutputStreamWriter(_outputStream, getCharacterEncoding()));
         }
         return _writer;
     }
@@ -313,8 +314,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * to the client. In HTTP servlets, this method sets the
      * HTTP Content-Length header.
      **/
-    public void setContentLength( int len ) {
-        setIntHeader( "Content-Length", len );
+    public void setContentLength(int len) {
+        setIntHeader("Content-Length", len);
     }
 
     @Override
@@ -329,15 +330,15 @@ class ServletUnitHttpResponse implements HttpServletResponse {
     /**
      * Adds a response header with the given name and value. This method allows response headers to have multiple values.
      **/
-    public void addHeader( String name, String value ) {
+    public void addHeader(String name, String value) {
         synchronized (_headers) {
             String key = name.toUpperCase();
-            ArrayList values = (ArrayList) _headers.get( key );
+            ArrayList values = (ArrayList) _headers.get(key);
             if (values == null) {
                 values = new ArrayList();
-                _headers.put( key, values );
+                _headers.put(key, values);
             }
-            values.add( value );
+            values.add(value);
         }
     }
 
@@ -345,16 +346,16 @@ class ServletUnitHttpResponse implements HttpServletResponse {
     /**
      * Adds a response header with the given name and value. This method allows response headers to have multiple values.
      **/
-    public void addIntHeader( String name, int value ) {
-        addHeader( name, asHeaderValue( value ) );
+    public void addIntHeader(String name, int value) {
+        addHeader(name, asHeaderValue(value));
     }
 
 
     /**
      * Adds a response header with the given name and value. This method allows response headers to have multiple values.
      **/
-    public void addDateHeader( String name, long value ) {
-        addHeader( name, asDateHeaderValue( value ) );
+    public void addDateHeader(String name, long value) {
+        addHeader(name, asDateHeaderValue(value));
     }
 
 
@@ -363,8 +364,8 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * will use a buffer at least as large as the size requested. The actual buffer size
      * used can be found using getBufferSize.
      **/
-    public void setBufferSize( int size ) {
-        if (getContents().length != 0) throw new IllegalStateException( "May not set buffer size after data is written" );
+    public void setBufferSize(int size) {
+        if (getContents().length != 0) throw new IllegalStateException("May not set buffer size after data is written");
     }
 
 
@@ -411,13 +412,13 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * as appropriate. This method should be called before a call to getWriter().
      * By default, the response locale is the default locale for the server.
      **/
-    public void setLocale( Locale locale ) {
+    public void setLocale(Locale locale) {
         _locale = locale;
         if (_encoding == null) {
-            for (Iterator it = ENCODING_MAP.entrySet().iterator(); it.hasNext();) {
+            for (Iterator it = ENCODING_MAP.entrySet().iterator(); it.hasNext(); ) {
                 Map.Entry entry = (Map.Entry) it.next();
                 String locales = (String) entry.getValue();
-                if (locales.indexOf( locale.getLanguage() ) >= 0 || locales.indexOf( locale.toString() ) >= 0) {
+                if (locales.indexOf(locale.getLanguage()) >= 0 || locales.indexOf(locale.toString()) >= 0) {
                     _encoding = (String) entry.getKey();
                     return;
                 }
@@ -444,7 +445,7 @@ class ServletUnitHttpResponse implements HttpServletResponse {
      * @since 1.3
      */
     public void resetBuffer() {
-        if (_committed) throw new IllegalStateException( "May not resetBuffer after response is committed" );
+        if (_committed) throw new IllegalStateException("May not resetBuffer after response is committed");
         _outputStream = null;
         _servletStream = null;
         _writer = null;
@@ -500,38 +501,40 @@ class ServletUnitHttpResponse implements HttpServletResponse {
     public String[] getHeaderFieldNames() {
         if (!_headersComplete) completeHeaders();
         Vector names = new Vector();
-        for (Enumeration e = _headers.keys(); e.hasMoreElements();) {
-            names.addElement( e.nextElement() );
+        for (Enumeration e = _headers.keys(); e.hasMoreElements(); ) {
+            names.addElement(e.nextElement());
         }
-        String[] result = new String[ names.size() ];
-        names.copyInto( result );
+        String[] result = new String[names.size()];
+        names.copyInto(result);
         return result;
     }
 
     /**
      * Returns the headers defined for this response.
+     *
      * @param name - the name of the field to get
      **/
-    String getHeaderFieldDirect( String name ) {
-      ArrayList values;
-      synchronized (_headers) {
-          values = (ArrayList) _headers.get( name.toUpperCase() );
-      }
+    String getHeaderFieldDirect(String name) {
+        ArrayList values;
+        synchronized (_headers) {
+            values = (ArrayList) _headers.get(name.toUpperCase());
+        }
 
-      return values == null ? null : (String) values.get( 0 );
+        return values == null ? null : (String) values.get(0);
     }
-    
+
     /**
      * Returns the headers defined for this response.
+     *
      * @param name
      **/
-    String getHeaderField( String name ) {
+    String getHeaderField(String name) {
         if (!_headersComplete) completeHeaders();
         return getHeaderFieldDirect(name);
-     }
+    }
 
 
-     /**
+    /**
      * Return an array of all the header values associated with the
      * specified header name, or an zero-length array if there are no such
      * header values.
@@ -572,7 +575,7 @@ class ServletUnitHttpResponse implements HttpServletResponse {
 
     private String _encoding;
 
-    private PrintWriter  _writer;
+    private PrintWriter _writer;
 
     private ServletOutputStream _servletStream;
 
@@ -586,15 +589,15 @@ class ServletUnitHttpResponse implements HttpServletResponse {
 
     private boolean _headersComplete;
 
-    private Vector  _cookies = new Vector();
+    private Vector _cookies = new Vector();
 
 
     private void completeHeaders() {
         if (_headersComplete) return;
         addCookieHeader();
         // BR 3301056 ServletUnit handling Content-Type incorrectly
-        if (getHeaderFieldDirect("Content-Type")==null) {
-        	setHeader( "Content-Type", _contentType + "; charset=" + getCharacterEncoding() );
+        if (getHeaderFieldDirect("Content-Type") == null) {
+            setHeader("Content-Type", _contentType + "; charset=" + getCharacterEncoding());
         }
         _headersComplete = true;
     }
@@ -603,49 +606,55 @@ class ServletUnitHttpResponse implements HttpServletResponse {
     private void addCookieHeader() {
         if (_cookies.isEmpty()) return;
 
+        String setCookie = "Set-Cookie".toUpperCase();
         StringBuffer sb = new StringBuffer();
-        for (Enumeration e = _cookies.elements(); e.hasMoreElements();) {
-            Cookie cookie = (Cookie) e.nextElement();
-            sb.append( cookie.getName() ).append( '=' ).append( cookie.getValue() );
-            if (cookie.getPath() != null) sb.append( ";path=" ).append( cookie.getPath() );
-            if (cookie.getDomain() != null) sb.append( ";domain=" ).append( cookie.getDomain() );
-            if (e.hasMoreElements()) sb.append( ',' );
+        synchronized (this._headers) {
+            if (this._headers.containsKey(setCookie)) {
+                String originCookie = ((ArrayList) this._headers.get(setCookie)).get(0).toString();
+                sb.append(originCookie).append(",");
+            }
+            for (Enumeration e = _cookies.elements(); e.hasMoreElements(); ) {
+                Cookie cookie = (Cookie) e.nextElement();
+                sb.append(cookie.getName()).append('=').append(cookie.getValue());
+                if (cookie.getPath() != null) sb.append(";path=").append(cookie.getPath());
+                if (cookie.getSecure()) sb.append(";secure");
+                if (cookie.getDomain() != null) sb.append(";domain=").append(cookie.getDomain());
+                if (e.hasMoreElements()) sb.append(',');
+            }
+            setHeader("Set-Cookie", sb.toString());
         }
-        setHeader( "Set-Cookie", sb.toString() );
     }
 
 
-
     static {
-        ENCODING_MAP.put( "iso-8859-1", "ca da de en es fi fr is it nl no pt sv " );
-        ENCODING_MAP.put( "iso-8859-2", "cs hr hu pl ro sh sk sl sq " );
-        ENCODING_MAP.put( "iso-8859-4", "et lt lv ");
-        ENCODING_MAP.put( "iso-8859-5", "be bg mk ru sr uk " );
-        ENCODING_MAP.put( "iso-8859-6", "ar " );
-        ENCODING_MAP.put( "iso-8859-7", "el " );
-        ENCODING_MAP.put( "iso-8859-8", "iw he " );
-        ENCODING_MAP.put( "iso-8859-9", "tr " );
+        ENCODING_MAP.put("iso-8859-1", "ca da de en es fi fr is it nl no pt sv ");
+        ENCODING_MAP.put("iso-8859-2", "cs hr hu pl ro sh sk sl sq ");
+        ENCODING_MAP.put("iso-8859-4", "et lt lv ");
+        ENCODING_MAP.put("iso-8859-5", "be bg mk ru sr uk ");
+        ENCODING_MAP.put("iso-8859-6", "ar ");
+        ENCODING_MAP.put("iso-8859-7", "el ");
+        ENCODING_MAP.put("iso-8859-8", "iw he ");
+        ENCODING_MAP.put("iso-8859-9", "tr ");
 
         ENCODING_MAP.put("Shift_JIS", "ja ");
-        ENCODING_MAP.put("EUC-KR",    "ko ");
-        ENCODING_MAP.put("TIS-620",   "th ");
-        ENCODING_MAP.put("GB2312",    "zh " );
-        ENCODING_MAP.put("Big5",      "zh_TW zh_HK " );
+        ENCODING_MAP.put("EUC-KR", "ko ");
+        ENCODING_MAP.put("TIS-620", "th ");
+        ENCODING_MAP.put("GB2312", "zh ");
+        ENCODING_MAP.put("Big5", "zh_TW zh_HK ");
     }
 
 }
 
 
-
 class ServletUnitOutputStream extends ServletOutputStream {
 
-    ServletUnitOutputStream( ByteArrayOutputStream stream ) {
+    ServletUnitOutputStream(ByteArrayOutputStream stream) {
         _stream = stream;
     }
 
 
-    public void write( int aByte ) throws IOException {
-        _stream.write( aByte );
+    public void write(int aByte) throws IOException {
+        _stream.write(aByte);
     }
 
     private ByteArrayOutputStream _stream;
